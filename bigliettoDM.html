@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Il Mio Biglietto da Visita Digitale</title>
+    <style>
+        :root {
+            --bg-color: #f4f6f9;
+            --card-bg: #ffffff;
+            --text-main: #1e293b;
+            --text-muted: #64748b;
+            --accent-color: #2563eb;
+            --accent-hover: #1d4ed8;
+            --border-color: #e2e8f0;
+            --shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05), 0 8px 10px -6px rgba(0, 0, 0, 0.05);
+        }
+
+        [data-theme="dark"] {
+            --bg-color: #0f172a;
+            --card-bg: #1e293b;
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+            --accent-color: #3b82f6;
+            --accent-hover: #60a5fa;
+            --border-color: #334155;
+            --shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.3), 0 8px 10px -6px rgba(0, 0, 0, 0.3);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .card {
+            background-color: var(--card-bg);
+            width: 100%;
+            max-width: 380px;
+            border-radius: 24px;
+            padding: 32px 24px;
+            box-shadow: var(--shadow);
+            border: 1px solid var(--border-color);
+            text-align: center;
+            position: relative;
+        }
+
+        .theme-toggle {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: none;
+            border: 1px solid var(--border-color);
+            padding: 8px;
+            border-radius: 50%;
+            cursor: pointer;
+            color: var(--text-main);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .theme-toggle:hover {
+            background-color: var(--border-color);
+        }
+
+        .avatar-container {
+            width: 100px;
+            height: 100px;
+            margin: 0 auto 16px auto;
+            background: linear-gradient(135deg, var(--accent-color), #a855f7);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 36px;
+            font-weight: bold;
+            box-shadow: 0 4px 14px rgba(37, 99, 235, 0.2);
+        }
+
+        h1 {
+            font-size: 22px;
+            font-weight: 700;
+            margin-bottom: 6px;
+            letter-spacing: -0.5px;
+        }
+
+        .headline {
+            font-size: 14px;
+            color: var(--accent-color);
+            font-weight: 600;
+            margin-bottom: 8px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .description {
+            font-size: 14px;
+            color: var(--text-muted);
+            line-height: 1.5;
+            margin-bottom: 24px;
+        }
+
+        .btn-primary {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            width: 100%;
+            background-color: var(--accent-color);
+            color: white;
+            border: none;
+            padding: 14px;
+            border-radius: 12px;
+            font-size: 15px;
+            font-weight: 600;
+            cursor: pointer;
+            margin-bottom: 24px;
+            box-shadow: 0 4px 12px rgba(37, 99, 235, 0.15);
+        }
+
+        .btn-primary:hover {
+            background-color: var(--accent-hover);
+        }
+
+        .links-container {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .link-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 12px 16px;
+            background-color: var(--bg-color);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            text-decoration: none;
+            color: var(--text-main);
+            font-size: 14px;
+            font-weight: 500;
+            text-align: left;
+            width: 100%;
+            cursor: pointer;
+            font-family: inherit;
+        }
+
+        .link-item:hover {
+            border-color: var(--accent-color);
+            background-color: var(--card-bg);
+        }
+
+        .link-icon {
+            font-size: 18px;
+            width: 24px;
+            text-align: center;
+        }
+
+        .link-text {
+            flex-grow: 1;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .arrow {
+            color: var(--text-muted);
+            font-size: 12px;
+        }
+
+        .footer-tag {
+            margin-top: 28px;
+            font-size: 11px;
+            color: var(--text-muted);
+            letter-spacing: 0.5px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="card">
+        <button class="theme-toggle" id="themeToggle" aria-label="Cambia tema">
+            <span id="themeIcon">🌙</span>
+        </button>
+
+        <div class="avatar-container">
+            DM
+        </div>
+
+        <h1 id="userName">Daniele Marino</h1>
+        <div class="headline">Junior Frontend Developer</div>
+        <p class="description">Realizzo landing page veloci, moderne e ottimizzate per smartphone che trasformano i visitatori in clienti.</p>
+
+        <button class="btn-primary" id="vcardBtn">
+            👤 Salva in Rubrica
+        </button>
+
+        <div class="links-container">
+            <button class="link-item" id="whatsappBtn">
+                <span class="link-icon">💬</span>
+                <span class="link-text" id="whatsappText">Scrivimi su WhatsApp</span>
+                <span class="arrow">▶</span>
+            </button>
+            
+            <button class="link-item" id="emailBtn">
+                <span class="link-icon">✉️</span>
+                <span class="link-text" id="emailText">Invia una Email</span>
+                <span class="arrow">▶</span>
+            </button>
+            
+            <a href="tel:+393497977741" class="link-item">
+                <span class="link-icon">📞</span>
+                <span class="link-text">Chiamata Rapida</span>
+                <span class="arrow">▶</span>
+            </a>
+        </div>
+
+        <div class="footer-tag">DIGITAL BUSINESS CARD v1.0</div>
+    </div>
+
+    <script>
+        // --- LOGICA DARK MODE ---
+        const themeToggle = document.getElementById('themeToggle');
+        const themeIcon = document.getElementById('themeIcon');
+        
+        themeToggle.addEventListener('click', () => {
+            const currentTheme = document.documentElement.getAttribute('data-theme');
+            if (currentTheme === 'dark') {
+                document.documentElement.removeAttribute('data-theme');
+                themeIcon.textContent = '🌙';
+            } else {
+                document.documentElement.setAttribute('data-theme', 'dark');
+                themeIcon.textContent = '☀️';
+            }
+        });
+
+        // --- LOGICA PULSANTI WHATSAPP ED EMAIL (MOSTRA INFO AL CLICK) ---
+        const whatsappBtn = document.getElementById('whatsappBtn');
+        const whatsappText = document.getElementById('whatsappText');
+        let whatsappRevealed = false;
+
+        whatsappBtn.addEventListener('click', () => {
+            if (!whatsappRevealed) {
+                whatsappText.textContent = '349 7977741';
+                whatsappRevealed = true;
+            } else {
+                window.open('https://wa.me/393497977741', '_blank');
+            }
+        });
+
+        const emailBtn = document.getElementById('emailBtn');
+        const emailText = document.getElementById('emailText');
+        let emailRevealed = false;
+
+        emailBtn.addEventListener('click', () => {
+            if (!emailRevealed) {
+                emailText.textContent = 'vita.mia993@gmail.com';
+                emailRevealed = true;
+            } else {
+                window.location.href = 'mailto:vita.mia993@gmail.com';
+            }
+        });
+
+        // --- LOGICA GENERAZIONE E SCARICAMENTO VCARD (SAVE TO CONTACTS) ---
+        document.getElementById('vcardBtn').addEventListener('click', () => {
+            const contact = {
+                firstName: 'Daniele',
+                lastName: 'Marino',
+                phone: '+393497977741',
+                email: 'vita.mia993@gmail.com',
+                title: 'Junior Frontend Developer',
+                url: window.location.href
+            };
+
+            const vcardData = [
+                'BEGIN:VCARD',
+                'VERSION:3.0',
+                `N:${contact.lastName};${contact.firstName};;;`,
+                `FN:${contact.firstName} ${contact.lastName}`,
+                `TITLE:${contact.title}`,
+                `TEL;TYPE=CELL:${contact.phone}`,
+                `EMAIL;TYPE=PREF,INTERNET:${contact.email}`,
+                `URL:${contact.url}`,
+                'END:VCARD'
+            ].join('\n');
+
+            const blob = new Blob([vcardData], { type: 'text/vcard;charset=utf-8;' });
+            const link = document.createElement('a');
+            
+            if (navigator.msSaveBlob) { 
+                navigator.msSaveBlob(blob, `${contact.firstName}_${contact.lastName}.vcf`);
+            } else {
+                link.href = window.URL.createObjectURL(blob);
+                link.setAttribute('download', `${contact.firstName}_${contact.lastName}.vcf`);
+                document.body.appendChild(link);
+                link.click();
+                document.body.removeChild(link);
+            }
+        });
+    </script>
+</body>
+</html>
